@@ -9,6 +9,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  {{#dependencies}}
+  {{.}}:
+  {{/dependencies}}
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

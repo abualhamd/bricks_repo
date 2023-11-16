@@ -30,3 +30,8 @@ vars:
     type: string
     description: Project name
     prompt: What is the project name?
+
+  dependencies:
+    type: list
+    description: List of dependencies
+    prompt: What dependencies do you want to add?
