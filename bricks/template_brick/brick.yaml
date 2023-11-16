@@ -30,6 +30,19 @@ vars:
     type: string
     description: Project name
     prompt: What is the project name?
+  projectDescription:
+    type: string
+    description: Project description
+    default: A new Flutter project.
+    prompt: What is the project description?
+  publishTo:
+    type: string
+    default: none
+    prompt: What is the publish_to value?
+  projectVersion:
+    type: string
+    default: 0.0.1
+    prompt: What is the version value?
 
   dependencies:
     type: list

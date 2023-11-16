@@ -1,7 +1,6 @@
 name: bricks_repo
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
 
 environment:
   sdk: '>=3.1.5 <4.0.0'

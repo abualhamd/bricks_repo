@@ -1,16 +1,17 @@
 name: {{projectName}}
-description: A new Flutter project.
-publish_to: 'none'
-version: 0.1.0
+description: {{projectDescription}}
+publish_to: '{{publishTo}}'
+version: {{projectVersion}}
 
-
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  {{#dependencies}}
-  {{.}}:
+  {{#dependencies}}{{.}}:
   {{/dependencies}}
 
 dev_dependencies:
