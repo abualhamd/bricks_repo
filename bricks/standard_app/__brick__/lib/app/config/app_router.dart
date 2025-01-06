@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../injection_container.dart';
-import '../../presentation/presentation.dart';
+import '../../presentation/screens.dart';
 import 'routes.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();

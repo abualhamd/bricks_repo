@@ -1,1 +1,1 @@
-export 'defs.dart';
+export 'typedefs/defs.dart';

@@ -45,6 +45,7 @@ Future<void> run(HookContext context) async {
         [
           'pub',
           'add',
+          'dartz',
           'flutter_bloc',
           'bloc_concurrency',
           'flutter_hooks',
@@ -102,14 +103,14 @@ Future<void> run(HookContext context) async {
   Future<void> addFlutterAssets() async {
     const filePath = 'pubspec.yaml'; // Specify the path to your file
     const fileAssets = '''
-  flutter_assets:
-    assets_path: 
-      - assets/icons
-      - assets/imgs
-    output_path: lib/core/utils
-    filename: assets_manager.dart
-    classname: AssetsManager
-    field_prefix:''';
+flutter_assets:
+  assets_path: 
+    - assets/icons
+    - assets/imgs
+  output_path: lib/core/utils
+  filename: assets_manager.dart
+  classname: AssetsManager
+  field_prefix:''';
 
     // Read the file
     final file = File(filePath);

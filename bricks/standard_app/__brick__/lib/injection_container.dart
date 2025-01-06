@@ -39,7 +39,7 @@ abstract class InjectionHelper {
     getIt.registerLazySingleton<ApiConsumer>(
       () => DioConsumer(
         client: getIt(),
-        baseUrl: EndPoints.base,
+        baseUrl: EndPoints.baseUrl,
         interceptors: getIt(),
       ),
     );
