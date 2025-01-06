@@ -4,8 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
-import '../../../core/network/api.dart';
-import '../../../core/network/error.dart';
+import '../../../core/network.dart';
 
 class DioConsumer implements ApiConsumer {
   final Dio _client;

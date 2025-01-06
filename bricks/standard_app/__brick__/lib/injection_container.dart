@@ -1,7 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import 'app/app.dart';
 import 'core/core.dart';
+import 'data/data.dart';
+import 'domain/domain.dart';
+import 'infrastructure/infrastructure.dart';
+import 'presentation/blocs.dart';
 
 final getIt = GetIt.instance;
 
@@ -18,18 +23,23 @@ Future initDependencies() async {
 
 abstract class InjectionHelper {
   static Future<void> injectExternal() async {
+    getIt.registerLazySingleton(() => AppInterceptors());
+    getIt.registerLazySingleton(() => LogInterceptor(
+          requestBody: true,
+          responseBody: true,
+        ));
     getIt.registerSingleton<Dio>(Dio());
   }
 
   static void injectCore() {
-    getIt.registerLazySingleton<BaseDio>(
-      () => DioClient(
-        dio: getIt(),
-        options: BaseOptions(
-          baseUrl: EndPoints.baseUrl,
-          connectTimeout: const Duration(seconds: 10),
-          receiveTimeout: const Duration(seconds: 10),
-        ),
+    getIt.registerLazySingleton<List<Interceptor>>(() => [
+          getIt<AppInterceptors>(),
+          getIt<LogInterceptor>(),
+        ]);
+    getIt.registerLazySingleton<ApiConsumer>(
+      () => DioConsumer(
+        client: getIt(),
+        baseUrl: EndPoints.base,
         interceptors: getIt(),
       ),
     );
