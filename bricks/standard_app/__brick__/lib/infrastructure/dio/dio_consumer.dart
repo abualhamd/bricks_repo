@@ -140,6 +140,6 @@ class DioConsumer implements ApiConsumer {
         exception = const NoInternetConnectionException();
     }
 
-    return ServerFailure(msg: exception.msg);
+    return ServerFailure(exception.msg);
   }
 }

@@ -1,5 +1,4 @@
 export 'base.dart';
-export 'constants.dart';
 export 'extensions.dart';
 export 'generated.dart';
 export 'network.dart';
