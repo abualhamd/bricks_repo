@@ -46,12 +46,30 @@ Future<void> run(HookContext context) async {
           'pub',
           'add',
           'flutter_bloc',
+          'bloc_concurrency',
+          'flutter_hooks',
           'get_it',
           "go_router",
           "dio",
           "intl:any",
-          "graphql_flutter",
           "shared_preferences",
+          'cached_network_image',
+          'equatable',
+          'freezed',
+          'freezed_annotation',
+          'json_annotation',
+          'skeletonizer',
+        ],
+        runInShell: true);
+    await Process.run(
+        'flutter',
+        [
+          'pub',
+          'add',
+          'build_runner',
+          'json_serializable',
+          'flutter_flavorizr',
+          '--dev',
         ],
         runInShell: true);
     await Process.run(
@@ -81,7 +99,33 @@ Future<void> run(HookContext context) async {
     progress.complete();
   }
 
+  Future<void> addFlutterAssets() async {
+    const filePath = 'pubspec.yaml'; // Specify the path to your file
+    const fileAssets = '''
+  flutter_assets:
+    assets_path: 
+      - assets/icons
+      - assets/imgs
+    output_path: lib/core/utils
+    filename: assets_manager.dart
+    classname: AssetsManager
+    field_prefix:''';
+
+    // Read the file
+    final file = File(filePath);
+
+    if (file.toString().contains(fileAssets)) {
+      return;
+    }
+
+    // Write the modified lines back to the file
+    await file.writeAsString(fileAssets, mode: FileMode.append);
+
+    log('flutter_assets yaml added successfully.');
+  }
+
   await addDependencies();
+  await addFlutterAssets();
   context.logger.info("Template Generated", style: (msg) {
     return '[Standard APP] $msg';
   });

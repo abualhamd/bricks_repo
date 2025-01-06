@@ -1,9 +1,5 @@
-import 'package:core/core.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:infrastructure/infrastructure.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/core.dart';
 
@@ -22,11 +18,6 @@ Future initDependencies() async {
 
 abstract class InjectionHelper {
   static Future<void> injectExternal() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-
-    getIt.registerFactory<BaseLocalStorage>(
-      () => SharedPrefsLocalStorageImpl(preferences: sharedPreferences),
-    );
     getIt.registerSingleton<Dio>(Dio());
   }
 
@@ -42,27 +33,6 @@ abstract class InjectionHelper {
         interceptors: getIt(),
       ),
     );
-    getIt.registerSingleton<Link>(CustomHttpLink(
-      graphQLBaseUrl: EndPoints.graphQLBaseUrl,
-    ));
-    getIt.registerSingleton<AuthLink>(AuthLink(
-      getToken: () async {
-        final accessToken =
-            await getIt<BaseLocalStorage>().getString(SharedKeys.accessToken);
-        return "Bearer $accessToken";
-      },
-    ));
-    getIt.registerSingleton<GraphQlConfig>(
-      GraphQlConfig(
-        link: Link.from(
-          [
-            getIt<AuthLink>(),
-            getIt<Link>(),
-          ],
-        ),
-      ),
-    );
-    getIt.registerSingleton<GraphService>(GraphService(graphQLConfig: getIt()));
   }
 
   static void injectDatasources() {}
